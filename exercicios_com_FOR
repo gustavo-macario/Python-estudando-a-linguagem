@@ -1,0 +1,136 @@
+# DESAFIO 1: Contagem regressiva de 10 a 0
+print("Desafio 1:")
+for i in range(10, -1, -1):
+    print(i)
+print("FIM")
+
+# DESAFIO 2: Números pares de 1 a 50
+print("\nDesafio 2:")
+for i in range(1, 51):
+    if i % 2 == 0:
+        print(i, end=' ')
+print("\nFIM")
+
+# DESAFIO 3: Soma de ímpares múltiplos de 3 (1 até 500)
+print("\nDesafio 3:")
+soma = 0
+for i in range(1, 501):
+    if i % 3 == 0 and i % 2 == 1:
+        soma += i
+print(f"A soma de todos os valores solicitados é {soma}")
+
+# DESAFIO 4: Tabuada v2.0
+print("\nDesafio 4:")
+num = int(input('Informe um numero para ver sua tabuada: '))
+for i in range(1, 11):
+    print(f'{num} x {i} = {num * i}')
+
+# DESAFIO 5: Soma dos pares (leitura de 6 números)
+print("\nDesafio 5:")
+soma_pares = 0
+for i in range(0, 6):
+    num = int(input(f'Digite o {i+1}º valor: '))
+    if num % 2 == 0:
+        soma_pares += num
+print(f'A soma dos números pares digitados é: {soma_pares}')
+
+# DESAFIO 6: Progressão Aritmética (10 primeiros termos)
+print("\nDesafio 6:")
+primeiro = int(input('Primeiro termo: '))
+razao = int(input('Razão: '))
+termo = primeiro
+for i in range(1, 11):
+    print(f'{termo}', end=' → ')
+    termo += razao
+print('ACABOU')
+
+# DESAFIO 7: Verificador de Números Primos
+print("\nDesafio 7:")
+num_primo = int(input('Digite um número para verificar se é primo: '))
+total_div = 0
+for i in range(1, num_primo + 1):
+    if num_primo % i == 0:
+        total_div += 1
+if total_div == 2:
+    print(f'O número {num_primo} É PRIMO!')
+else:
+    print(f'O número {num_primo} NÃO É PRIMO!')
+
+# DESAFIO 8: Detector de Palíndromos
+print("\nDesafio 8:")
+frase = str(input('Digite uma frase: ')).strip().upper()
+palavras = frase.split()
+junto = ''.join(palavras)
+inverso = ''
+for letra in range(len(junto) - 1, -1, -1):
+    inverso += junto[letra]
+print(f'O inverso de {junto} é {inverso}')
+if inverso == junto:
+    print('Temos um PALÍNDROMO!')
+else:
+    print('A frase digitada não é um palíndromo!')
+
+# DESAFIO 9: Grupo da Maioridade (7 pessoas)
+print("\nDesafio 9:")
+maiores = 0
+menores = 0
+ano_atual = 2026 # Contexto do exercício
+for pess in range(1, 8):
+    nasc = int(input(f'Em que ano a {pess}ª pessoa nasceu? '))
+    idade = ano_atual - nasc
+    if idade >= 18:
+        maiores += 1
+    else:
+        menores += 1
+print(f'Ao todo tivemos {maiores} pessoas maiores de idade e {menores} menores.')
+
+# DESAFIO 10: Maior e Menor Peso do grupo
+print("\nDesafio 10:")
+maior_p = 0
+menor_p = 0
+for p in range(1, 6):
+    peso = float(input(f'Peso da {p}ª pessoa (kg): '))
+    if p == 1:
+        maior_p = peso
+        menor_p = peso
+    else:
+        if peso > maior_p:
+            maior_p = peso
+        if peso < menor_p:
+            menor_p = peso
+print(f'O maior peso lido foi de {maior_p}kg e o menor foi de {menor_p}kg.')
+
+# DESAFIO 11: Analisador completo (Idade, Sexo, Nome)
+print("\nDesafio 11:")
+soma_idade = 0
+media_idade = 0
+maior_idade_homem = 0
+nome_mais_velho = ''
+tot_mulher_20 = 0
+
+for p in range(1, 5):
+    print(f'----- {p}ª PESSOA -----')
+    nome = str(input('Nome: ')).strip()
+    idade = int(input('Idade: '))
+    sexo = str(input('Sexo [M/F]: ')).strip().upper()
+    soma_idade += idade
+    
+    if sexo == 'M' or sexo == 'MASCULINO':
+        if nome_mais_velho == '' or idade > maior_idade_homem:
+            maior_idade_homem = idade
+            nome_mais_velho = nome
+            
+    if (sexo == 'F' or sexo == 'FEMININO') and idade < 20:
+        tot_mulher_20 += 1
+
+media_idade = soma_idade / 4
+print(f'A média de idade do grupo é de {media_idade} anos.')
+print(f'O homem mais velho tem {maior_idade_homem} anos e se chama {nome_mais_velho}.')
+print(f'Ao todo são {tot_mulher_20} mulheres com menos de 20 anos.')
+
+# EXTRA: Validação de Dados (While)
+print("\nDesafio Extra (Validação):")
+sexo_valida = str(input('Informe seu sexo [M/F]: ')).strip().upper()
+while sexo_valida not in 'MF' or sexo_valida == '':
+    sexo_valida = str(input('Dados inválidos. Por favor, informe seu sexo: ')).strip().upper()
+print(f'Sexo {sexo_valida} registrado com sucesso.')
