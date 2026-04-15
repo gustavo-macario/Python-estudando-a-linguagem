@@ -1,0 +1,193 @@
+import random
+
+# =========================
+# DESAFIO 1: Repetição com confirmação
+# =========================
+print("Desafio 1:")
+r = 'S'
+while r == 'S':
+    n = int(input('Digite um valor: '))
+    r = str(input('Quer continuar? [S/N]: ')).upper()
+print('FIM')
+
+
+# =========================
+# DESAFIO 2: Validação de sexo
+# =========================
+print("\nDesafio 2:")
+sexo = ''
+while sexo != 'M' and sexo != 'F':
+    sexo = str(input('Digite seu sexo: ')).upper()
+    if sexo != 'M' and sexo != 'F':
+        print('DIGITOU ERRADO, TENTE NOVAMENTE!')
+print('FIM')
+
+
+# =========================
+# DESAFIO 3: Jogo de adivinhação
+# =========================
+print("\nDesafio 3:")
+numero = random.randint(1, 10)
+num = 0
+
+while num != numero:
+    num = int(input('Tente adivinhar um número de 1 a 10: '))
+    if num != numero:
+        print('Errado, tente novamente!')
+    else:
+        print('Você acertou!')
+
+
+# =========================
+# DESAFIO 4: Menu de operações
+# =========================
+print("\nDesafio 4:")
+num1 = int(input('Digite o primeiro valor: '))
+num2 = int(input('Digite o segundo valor: '))
+opcao = 0
+
+while opcao != 5:
+    print('\nESCOLHA UMA OPÇÃO')
+    opcao = int(input('[1] SOMAR / [2] MULTIPLICAR / [3] MAIOR / [4] NOVOS NÚMEROS / [5] SAIR: '))
+
+    if opcao == 1:
+        print('Resultado:', num1 + num2)
+
+    elif opcao == 2:
+        print('Resultado:', num1 * num2)
+
+    elif opcao == 3:
+        print('Maior número:', max(num1, num2))
+
+    elif opcao == 4:
+        num1 = int(input('Digite o primeiro valor: '))
+        num2 = int(input('Digite o segundo valor: '))
+
+    elif opcao == 5:
+        print('PROGRAMA ENCERRADO!')
+
+    else:
+        print('OPÇÃO INVÁLIDA!')
+
+
+# =========================
+# DESAFIO 5: Fatorial
+# =========================
+print("\nDesafio 5:")
+num = int(input('Digite um número: '))
+i = num
+fatorial = 1
+
+while i > 0:
+    fatorial *= i
+    i -= 1
+
+print(f'Fatorial de {num} = {fatorial}')
+
+
+# =========================
+# DESAFIO 6: Progressão Aritmética (10 termos)
+# =========================
+print("\nDesafio 6:")
+num = int(input('Termo: '))
+razao = int(input('Razão: '))
+contador = 0
+
+while contador < 10:
+    print(num, end=' > ')
+    num += razao
+    contador += 1
+
+print('FIM')
+
+
+# =========================
+# DESAFIO 7: PA com mais termos
+# =========================
+print("\nDesafio 7:")
+num = int(input('Termo: '))
+razao = int(input('Razão: '))
+total = 0
+mais = 10
+cont = 1
+
+while mais != 0:
+    total += mais
+    while cont <= total:
+        print(num, end=' > ')
+        num += razao
+        cont += 1
+
+    print('PAUSA')
+    mais = int(input('Quantos termos a mais quer mostrar? [0 para sair] '))
+
+print('FIM')
+
+
+# =========================
+# DESAFIO 8: Sequência de Fibonacci
+# =========================
+print("\nDesafio 8:")
+num = int(input('Digite o tamanho da sequência: '))
+t1 = 0
+t2 = 1
+
+print(f'{t1} -> {t2}', end='')
+
+contador = 2
+
+while contador < num:
+    t3 = t1 + t2
+    print(f' -> {t3}', end='')
+
+    t1 = t2
+    t2 = t3
+    contador += 1
+
+print(' -> FIM')
+
+
+# =========================
+# DESAFIO 9: Soma até 999
+# =========================
+print("\nDesafio 9:")
+num = soma = qtde = 0
+
+num = int(input('Digite um número [999 para parar]: '))
+
+while num != 999:
+    soma += num
+    qtde += 1
+    num = int(input('Digite um número [999 para parar]: '))
+
+print(f'Você digitou {qtde} números e a soma foi {soma}.')
+
+
+# =========================
+# DESAFIO 10: Média, maior e menor
+# =========================
+print("\nDesafio 10:")
+num = soma = qtde = 0
+maior = menor = 0
+opcao = 1
+
+while opcao == 1:
+    num = int(input('Digite um número: '))
+    soma += num
+    qtde += 1
+
+    if qtde == 1:
+        maior = menor = num
+    else:
+        if num > maior:
+            maior = num
+        if num < menor:
+            menor = num
+
+    opcao = int(input('[1] INSERIR MAIS / [2] ENCERRAR: '))
+
+media = soma / qtde if qtde > 0 else 0
+
+print(f'Média: {media:.2f}')
+print(f'Maior número: {maior}')
+print(f'Menor número: {menor}')
