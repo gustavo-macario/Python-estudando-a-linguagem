@@ -191,3 +191,99 @@ media = soma / qtde if qtde > 0 else 0
 print(f'Média: {media:.2f}')
 print(f'Maior número: {maior}')
 print(f'Menor número: {menor}')
+
+
+# =========================
+# DESAFIO 11: Validador de senha
+# =========================
+print("Desafio 11:")
+senha = '1234'
+user_try = ''
+
+while user_try != senha:
+    user_try = input('Digite a senha: ')
+    if user_try != senha:
+        print('Senha errada, tente novamente!')
+
+print('Acesso liberado!')
+
+
+# =========================
+# DESAFIO 12: Soma de números pares
+# =========================
+print("\nDesafio 12:")
+num = 0
+soma = 0
+
+while num >= 0:
+    num = int(input('Digite um número (negativo para parar): '))
+
+    if num >= 0 and num % 2 == 0:
+        soma += num
+
+print('A soma dos números pares foi:', soma)
+
+
+# =========================
+# DESAFIO 13: Contador de pares e ímpares
+# =========================
+print("\nDesafio 13:")
+qtde_pares = 0
+qtde_impares = 0
+num = 1
+
+while num != 0:
+    num = int(input('Digite um número (0 para parar): '))
+
+    if num == 0:
+        print('ENCERRADO!')
+    elif num % 2 == 0:
+        qtde_pares += 1
+    else:
+        qtde_impares += 1
+
+print(f'Pares: {qtde_pares} | Ímpares: {qtde_impares}')
+
+
+# =========================
+# DESAFIO 14: Tabuada interativa
+# =========================
+print("\nDesafio 14:")
+opcao = 0
+
+while opcao == 0:
+    num = int(input('Digite o número da tabuada: '))
+
+    for i in range(1, 11):
+        print(f'{num} x {i} = {num * i}')
+
+    opcao = int(input('Quer ver outra tabuada? [0] SIM | [1] NÃO: '))
+
+print('PROGRAMA ENCERRADO!')
+
+
+# =========================
+# DESAFIO 15: Maior idade
+# =========================
+print("\nDesafio 15:")
+idade = 0
+maior = 0
+qtde = 0
+
+while idade >= 0:
+    idade = int(input('Informe a sua idade: [< 0 PARA SAIR] '))
+
+    if idade < 0:
+        break
+
+    qtde += 1
+
+    if qtde == 1:
+        maior = idade
+    elif idade > maior:
+        maior = idade
+
+if qtde > 0:
+    print('A maior idade foi:', maior)
+else:
+    print('Nenhuma idade válida foi digitada.')
