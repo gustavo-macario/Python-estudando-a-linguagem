@@ -1,0 +1,166 @@
+import random
+
+# =========================
+# DESAFIO 1: Soma até 999
+# =========================
+print("Desafio 1:")
+qtde = 0
+soma = 0
+
+while True:
+    num = int(input('Digite um número [999 para parar]: '))
+    
+    if num == 999:
+        break
+
+    qtde += 1
+    soma += num
+
+print(f'Quantidade de números: {qtde}')
+print(f'Soma total: {soma}')
+
+
+# =========================
+# DESAFIO 2: Tabuada com parada
+# =========================
+print("\nDesafio 2:")
+
+while True:
+    num = int(input('Digite um número para ver a tabuada (negativo para sair): '))
+
+    if num < 0:
+        print('ENCERRADO!')
+        break
+
+    for i in range(1, 11):
+        print(f'{num} x {i} = {num * i}')
+
+
+# =========================
+# DESAFIO 3: Par ou Ímpar
+# =========================
+print("\nDesafio 3:")
+vitorias = 0
+
+while True:
+    num_pc = random.randint(1, 10)
+    num = int(input('Digite um número: '))
+    escolha = input('Par ou Ímpar? [P/I]: ').upper()
+
+    soma = num + num_pc
+
+    if (soma % 2 == 0 and escolha == 'P') or (soma % 2 == 1 and escolha == 'I'):
+        vitorias += 1
+        print('=== VOCÊ GANHOU ===')
+    else:
+        print('=== VOCÊ PERDEU ===')
+        break
+
+    print(f'Sua jogada: {num} ({escolha}) | PC: {num_pc}')
+    print(f'Vitórias consecutivas: {vitorias}')
+
+
+# =========================
+# DESAFIO 4: Cadastro de pessoas
+# =========================
+print("\nDesafio 4:")
+qtde_18 = 0
+qtde_m = 0
+qtde_f20 = 0
+
+while True:
+    idade = int(input('Idade: '))
+
+    sexo = input('Sexo [M/F]: ').upper()
+    while sexo not in ['M', 'F']:
+        sexo = input('Sexo inválido. Digite [M/F]: ').upper()
+
+    if idade >= 18:
+        qtde_18 += 1
+
+    if sexo == 'M':
+        qtde_m += 1
+
+    if sexo == 'F' and idade < 20:
+        qtde_f20 += 1
+
+    opcao = input('Deseja continuar? [S/N]: ').upper()
+    while opcao not in ['S', 'N']:
+        opcao = input('Opção inválida. Digite [S/N]: ').upper()
+
+    if opcao == 'N':
+        break
+
+print(f'(A) Maiores de 18: {qtde_18}')
+print(f'(B) Homens: {qtde_m}')
+print(f'(C) Mulheres < 20: {qtde_f20}')
+
+
+# =========================
+# DESAFIO 5: Controle de produtos
+# =========================
+print("\nDesafio 5:")
+total = 0
+qtde_1000 = 0
+menor = 0
+nome_menor = ''
+qtde = 0
+
+while True:
+    nome = input('Nome do produto: ')
+    preco = float(input('Preço: R$ '))
+
+    qtde += 1
+    total += preco
+
+    if preco > 1000:
+        qtde_1000 += 1
+
+    if qtde == 1:
+        menor = preco
+        nome_menor = nome
+    elif preco < menor:
+        menor = preco
+        nome_menor = nome
+
+    opcao = input('Deseja continuar? [S/N]: ').upper()
+    while opcao not in ['S', 'N']:
+        opcao = input('Opção inválida. Digite [S/N]: ').upper()
+
+    if opcao == 'N':
+        break
+
+print(f'(A) Total gasto: R$ {total:.2f}')
+print(f'(B) Produtos > R$1000: {qtde_1000}')
+print(f'(C) Produto mais barato: {nome_menor}')
+
+
+# =========================
+# DESAFIO 6: Caixa eletrônico
+# =========================
+print("\nDesafio 6:")
+valor = int(input('Valor a ser sacado: R$ '))
+
+qtde_50 = qtde_20 = qtde_10 = qtde_1 = 0
+
+while True:
+    if valor >= 50:
+        valor -= 50
+        qtde_50 += 1
+    elif valor >= 20:
+        valor -= 20
+        qtde_20 += 1
+    elif valor >= 10:
+        valor -= 10
+        qtde_10 += 1
+    else:
+        valor -= 1
+        qtde_1 += 1
+
+    if valor == 0:
+        break
+
+print(f'R$50: {qtde_50}')
+print(f'R$20: {qtde_20}')
+print(f'R$10: {qtde_10}')
+print(f'R$1: {qtde_1}')
