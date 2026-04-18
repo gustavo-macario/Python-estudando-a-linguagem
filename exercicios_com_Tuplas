@@ -1,0 +1,78 @@
+# Desafio 1
+# numeros = ('zero', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis','sete', 'oito', 'nove', 'dez', 'onze', 'doze', 'treze','quatorze', 'quinze', 'dezesseis', 'dezessete', 'dezoito', 'dezenove', 'vinte')
+# num = int(input('Digite um de numerpo de 0 a 20: '))
+
+# if (num < 0 or num > 20):
+#     print('Numero Invalido!')
+# else:
+#     print(numeros[num])
+
+
+# Desafio 2
+# tabela_brasileirao = ('Palmeiras', 'Grêmio', 'Atlético-MG', 'Flamengo', 'Botafogo', 'Bragantino', 'Fluminense', 'Athletico-PR', 'Internacional', 'Fortaleza', 'São Paulo', 'Cuiabá', 'Corinthians', 'Cruzeiro', 'Santos', 'Vasco', 'Bahia', 'Goiás', 'Coritiba', 'América-MG')
+
+# print('(A) 5 PRIMEIROS COLOCADOS:', tabela_brasileirao[0:5])
+# print('(B) 5 ULTIMOS COLOCADOS:', tabela_brasileirao[-4:])
+# print('(C) COLOCADOS EM ORDEM ALFABETICA:', sorted(tabela_brasileirao))
+# print('(D) POSICAO DO INTERNACIONAL:', tabela_brasileirao.index('Internacional'))
+
+
+# Desafio 3
+# numeros = (random.randint(1,10),random.randint(1,10),random.randint(1,10),random.randint(1,10),random.randint(1,10))
+# maior = max(numeros)
+# menor = min(numeros)
+# print (f'Lista: {numeros}, Maior: {maior}, Menor: {menor}')
+
+
+# Desafio 4
+# num = () 
+
+# for i in range(0, 4):
+#     n = int(input('Digite um valor: '))
+#     num += (n,) 
+
+
+# print('(A) QUANTIDADE DE VEZES QUE APARECEU O 9:',num.count(9))
+
+# if(3 in num):
+#    print('(B) POSICAO DO PRIMEIRO 3:', num.index(3))
+
+# else:
+#     print('(B) O 3 NAO ESTA FOI DIGITADO!')
+
+
+# print('(C) Os valores pares digitados foram: ', end='')
+# for n in num:
+#     if (n % 2== 0):
+#         print(n, end=' ')
+
+
+
+
+# Desafio 4
+# produtos = ('Lápis', 1.75, 'Borracha', 2.00, 'Caderno', 15.90, 
+#             'Estojo', 25.00, 'Transferidor', 4.20, 'Compasso', 9.99, 
+#             'Mochila', 120.32, 'Canetas', 22.30, 'Livro', 34.90)
+
+# print('-' * 40)
+# print(f'{"LISTAGEM DE PREÇOS":^40}')
+# print('-' * 40)
+
+# for pos in range(0, len(produtos)):
+#     if pos % 2 == 0:
+#         print(f'{produtos[pos]:.<30}', end='')
+#     else:
+#         print(f'R${produtos[pos]:>7.2f}')
+
+# print('-' * 40)
+
+
+# Desafio 5
+palavras = ('nao', 'sim', 'onibus', 'carro', 'mouse', 'vaca')
+
+for i in palavras:
+    print(f'\nNa palavra: {i}, Temos as seguintes vogais:', end='')
+
+    for palavras in i:
+        if(palavras in 'aeiou'):
+            print(palavras, end=' ')
