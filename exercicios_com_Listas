@@ -138,3 +138,172 @@ if len(pilha) == 0:
     print('Expressão válida!')
 else:
     print('Expressão inválida!')
+
+
+Aqui está o seu código organizado e formatado para o GitHub. Eu atualizei a numeração dos desafios para começar do 07 e apliquei melhorias na legibilidade, mantendo a lógica original de cada exercício.
+
+Python
+import random
+
+# ==========================================
+# DESAFIO 07 - Análise de Dados e Pesos
+# ==========================================
+dados = []
+lista = []
+qtde = 0
+maior = menor = 0
+
+while True:
+    dados.append(str(input('Digite seu nome: ')))
+    dados.append(float(input('Digite seu peso: ')))
+    lista.append(dados[:])
+    qtde += 1
+
+    if len(lista) == 1:
+        maior = menor = dados[1]
+    else:
+        if dados[1] > maior:
+            maior = dados[1]
+        if dados[1] < menor:
+            menor = dados[1]
+    
+    dados.clear()
+    opcao = str(input('Continuar? [S/N] ')).upper().strip()
+    if opcao == 'N':
+        print('ENCERRADO!')
+        break
+
+print('-=' * 30)
+print(f'(A) Quantidade de pessoas cadastradas: {qtde}')
+
+print(f'(B) O maior peso foi {maior}kg. Peso de: ', end='')
+for p in lista:
+    if p[1] == maior:
+        print(f'[{p[0]}] ', end='')
+
+print(f'\n(C) O menor peso foi {menor}kg. Peso de: ', end='')
+for p in lista:
+    if p[1] == menor:
+        print(f'[{p[0]}] ', end='')
+print('\n')
+
+
+# ==========================================
+# DESAFIO 08 - Lista com Pares e Ímpares
+# ==========================================
+lista_num = [[], []]
+for i in range(1, 8):
+    num = int(input(f'Digite o {i}º número: '))
+    if num % 2 == 0:
+        lista_num[0].append(num)
+    else:
+        lista_num[1].append(num)
+
+lista_num[0].sort()
+lista_num[1].sort()
+
+print('-=' * 30)
+print(f'Os números PARES são: {lista_num[0]}')
+print(f'Os números ÍMPARES são: {lista_num[1]}')
+
+
+# ==========================================
+# DESAFIO 09 - Matriz em Python
+# ==========================================
+matriz = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+
+for l in range(0, 3):
+    for c in range(0, 3):
+        matriz[l][c] = int(input(f'Digite um valor para [{l}, {c}]: '))
+
+print('-=' * 30)
+for l in range(0, 3):
+    for c in range(0, 3):
+        print(f'[{matriz[l][c]:^5}]', end='')
+    print()
+
+
+# ==========================================
+# DESAFIO 10 - Mais sobre Matrizes
+# ==========================================
+matriz_v2 = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+soma_pares = soma_terceira_col = maior_segunda_lin = 0
+
+for l in range(0, 3):
+    for c in range(0, 3):
+        matriz_v2[l][c] = int(input(f'Digite um valor para [{l}, {c}]: '))
+        
+        # (A) Soma dos pares
+        if matriz_v2[l][c] % 2 == 0:
+            soma_pares += matriz_v2[l][c]
+            
+        # (B) Soma da terceira coluna
+        if c == 2:
+            soma_terceira_col += matriz_v2[l][c]
+            
+        # (C) Maior valor da segunda linha
+        if l == 1:
+            if c == 0 or matriz_v2[l][c] > maior_segunda_lin:
+                maior_segunda_lin = matriz_v2[l][c]
+
+print('-=' * 30)
+for l in range(0, 3):
+    for c in range(0, 3):
+        print(f'[{matriz_v2[l][c]:^5}]', end='')
+    print()
+
+print(f'(A) SOMA DOS PARES: {soma_pares}')
+print(f'(B) SOMA DA TERCEIRA COLUNA: {soma_terceira_col}')
+print(f'(C) MAIOR VALOR DA SEGUNDA LINHA: {maior_segunda_lin}')
+
+
+# ==========================================
+# DESAFIO 11 - Palpites para a Mega Sena
+# ==========================================
+print('-=' * 30)
+qtd = int(input('Quantos jogos quer sortear? '))
+jogos = []
+
+for i in range(0, qtd):
+    sorteio = random.sample(range(1, 61), 6)
+    sorteio.sort()
+    jogos.append(sorteio)
+    
+print(f'{" SORTEANDO JOGOS ":=^30}')
+for i, l in enumerate(jogos):
+    print(f'Jogo {i+1}: {l}')
+
+
+# ==========================================
+# DESAFIO 12 - Boletim com Listas Compostas
+# ==========================================
+print('-=' * 30)
+boletim = []
+
+while True:
+    nome = str(input('Nome: '))
+    nota1 = float(input('Nota 1: '))
+    nota2 = float(input('Nota 2: '))
+    media = (nota1 + nota2) / 2
+    boletim.append([nome, [nota1, nota2], media])
+
+    opcao = str(input('Quer continuar? [S/N] ')).upper().strip()
+    if opcao == 'N':
+        break
+
+print('-=' * 30)
+print(f'{"ID":<4}{"NOME":<10}{"MÉDIA":>8}')
+print('-' * 26)
+for i, aluno in enumerate(boletim):
+    print(f'{i:<4}{aluno[0]:<10}{aluno[2]:>8.1f}')
+
+while True:
+    print('-' * 35)
+    opcao2 = int(input('Mostrar notas de qual aluno? (999 interrompe): '))
+    if opcao2 == 999:
+        print('FINALIZANDO...')
+        break
+    if opcao2 <= len(boletim) - 1:
+        print(f'Notas de {boletim[opcao2][0]} são: {boletim[opcao2][1]}')
+    else:
+        print('ID inválido! Tente novamente.')
