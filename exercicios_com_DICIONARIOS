@@ -1,0 +1,190 @@
+import random
+from operator import itemgetter
+
+# --- DESAFIO 1: Boletim de Aluno ---
+# Objetivo: Ler nome e média, guardando a situação (Aprovado/Reprovado) em um dicionário.
+print(f'{" DESAFIO 1 ":=^30}')
+alunos = {}
+alunos['nome'] = str(input('Informe seu nome: '))
+alunos['Media'] = float(input('Informe sua média: '))
+
+if alunos['Media'] < 7:
+    alunos['Situacao'] = 'Reprovado'
+else:
+    alunos['Situacao'] = 'Aprovado'
+
+print(f'Meu nome é {alunos["nome"]}, minha média é {alunos["Media"]} e minha situação é {alunos["Situacao"]}.')
+
+
+# --- DESAFIO 2: Jogo de Dados (Ranking) ---
+# Objetivo: 4 jogadores jogam um dado e o programa ordena o ranking e verifica empate.
+print(f'\n{" DESAFIO 2 ":=^30}')
+resultados = {}
+maior = 0
+empate = False
+vencedor = ""
+
+for i in range(1, 5):
+    valor = random.randint(1, 6)
+    print(f'O jogador {i} tirou {valor}')
+    resultados[f'Jogador {i}'] = valor
+
+    if i == 1:
+        maior = valor
+        vencedor = f'Jogador {i}'
+    else:
+        if valor > maior:
+            maior = valor
+            vencedor = f'Jogador {i}'
+            empate = False
+        elif valor == maior:
+            empate = True
+
+ranking = sorted(resultados.items(), key=itemgetter(1), reverse=True)
+print(f'Ranking: {ranking}')
+
+if not empate:
+    print(f'E o vencedor foi o {vencedor} com o valor {resultados[vencedor]}')
+else:
+    print('Não teve ganhador único, deu empate no topo!')
+
+
+# --- DESAFIO 3: Cadastro de Trabalhador ---
+# Objetivo: Calcular idade e ano de aposentadoria (baseado em 35 anos de contribuição).
+print(f'\n{" DESAFIO 3 ":=^30}')
+pessoa = {}
+pessoa['Nome'] = str(input('Nome: '))
+pessoa['Ano_Nascimento'] = int(input('Ano de Nascimento: '))
+pessoa['Idade'] = 2026 - pessoa['Ano_Nascimento'] 
+pessoa['CTPS'] = int(input('Carteira de Trabalho (0 não tem): '))
+
+if pessoa['CTPS'] != 0:
+    pessoa['AnoContratacao'] = int(input('Ano de Contratação: '))
+    pessoa['Salario'] = float(input('Salário: R$'))
+    
+    # Cálculo: anos trabalhados até 2026
+    tempo_contribuido = 2026 - pessoa['AnoContratacao']
+    # Aposentadoria após 35 anos de contribuição
+    pessoa['IdadeAposentadoria'] = pessoa['Idade'] + (35 - tempo_contribuido)
+    
+    print('-' * 30)
+    for k, v in pessoa.items():
+        print(f'{k}: {v}')
+else:
+    print('-' * 30)
+    print(f'Nome: {pessoa["Nome"]}')
+    print(f'Idade: {pessoa["Idade"]}')
+    print('Status: Pessoa não possui registro de trabalho.')
+
+
+# --- DESAFIO 4: Aproveitamento de Jogador de Futebol ---
+# Objetivo: Dicionário que gerencia o aproveitamento de um jogador em várias partidas.
+print(f'\n{" DESAFIO 4 ":=^30}')
+jogador_ind = {}
+gols_ind = []
+
+jogador_ind['Nome'] = str(input('Informe o nome do jogador: '))
+partidas_ind = int(input(f'Quantas partidas {jogador_ind["Nome"]} jogou? '))
+
+for i in range(0, partidas_ind):
+    gols_ind.append(int(input(f'   Quantos gols na partida {i + 1}? ')))
+
+jogador_ind['gols'] = gols_ind[:]
+jogador_ind['total'] = sum(gols_ind)
+
+print('-=' * 30)
+print(jogador_ind)
+print('-=' * 30)
+
+for k, v in jogador_ind.items():
+    print(f'O campo {k} tem o valor {v}')
+
+print('-=' * 30)
+print(f'O jogador {jogador_ind["Nome"]} jogou {partidas_ind} partidas.')
+for i, g in enumerate(jogador_ind['gols']):
+    print(f'    => Na partida {i + 1}, fez {g} gols.')
+print(f'Foi um total de {jogador_ind["total"]} gols.')
+
+
+# --- DESAFIO 5: União de Dicionários e Listas ---
+# Objetivo: Cadastrar várias pessoas e gerar relatórios de média e filtros por sexo.
+print(f'\n{" DESAFIO 5 ":=^30}')
+lista_pessoas = []
+soma_idade = 0
+
+while True:
+    p_temp = {}
+    p_temp['Nome'] = str(input('Nome: '))
+    while True:
+        p_temp['Sexo'] = str(input('Sexo [M/F]: ')).upper().strip()[0]
+        if p_temp['Sexo'] in 'MF':
+            break
+        print('ERRO! Por favor, digite apenas M ou F.')
+    p_temp['Idade'] = int(input('Idade: '))
+    soma_idade += p_temp['Idade']
+    lista_pessoas.append(p_temp.copy())
+    
+    opc = str(input('Quer Continuar? [S/N] ')).upper().strip()[0]
+    if opc == 'N':
+        break
+
+media_idade = soma_idade / len(lista_pessoas)
+
+print('-=' * 30)
+print(f'(A) Quantidade de pessoas: {len(lista_pessoas)}')
+print(f'(B) Média de idade: {media_idade:5.2f}')
+print('(C) Mulheres cadastradas: ', end='')
+for p in lista_pessoas:
+    if p['Sexo'] == 'F':
+        print(f'[{p["Nome"]}] ', end='')
+print('\n(D) Pessoas com idade acima da média: ')
+for p in lista_pessoas: 
+    if p['Idade'] > media_idade:
+        print(f'    -> {p["Nome"]} com {p["Idade"]} anos.')
+
+
+# --- DESAFIO 6: Sistema de Gerenciamento de Time ---
+# Objetivo: Aprimorar o desafio 4 para aceitar vários jogadores e busca por ID.
+print(f'\n{" DESAFIO 6 ":=^30}')
+time = {}
+cod_atual = 0
+
+while True: 
+    cod_atual += 1
+    nome_j = str(input('Nome do jogador: '))
+    tot_partidas = int(input(f'Quantas partidas {nome_j} jogou? '))
+    
+    gols_j = []
+    for i in range(0, tot_partidas):
+        gols_j.append(int(input(f'  Gols na partida {i + 1}: ')))
+
+    time[cod_atual] = {
+        'Nome': nome_j,
+        'gols': gols_j[:],
+        'total': sum(gols_j)
+    }
+
+    while True:
+        resp = str(input('Quer continuar? [S/N] ')).upper().strip()[0]
+        if resp in 'SN':
+            break
+    if resp == 'N':
+        break
+ 
+print('-=' * 30)
+print(f'{"cod":<4} {"nome":<15} {"gols":<15} {"total":<5}')
+for k, v in time.items():
+    print(f'{k:<4} {v["Nome"]:<15} {str(v["gols"]):<15} {v["total"]:<5}')
+
+while True:
+    print('-' * 30)
+    busca = int(input('Mostrar dados de qual jogador? (999 para parar): '))
+    if busca == 999:
+        break
+    if busca in time:
+        print(f' -- LEVANTAMENTO DO JOGADOR {time[busca]["Nome"]}:')
+        for i, g in enumerate(time[busca]['gols']):
+            print(f'    No jogo {i + 1} fez {g} gols.')
+    else:
+        print(f'ERRO! Não existe jogador com código {busca}!')
+print('<< VOLTE SEMPRE >>')
