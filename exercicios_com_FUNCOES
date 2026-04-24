@@ -108,3 +108,36 @@ sorteia()
 somaPar()
 
 print(f'\n{" FIM DOS DESAFIOS ":=^30}')
+
+
+
+# --- DESAFIO 6 ---
+# def voto(a = 0):
+#     idade = 2026 - a
+#     if(16 <= idade < 18 or idade >= 65):
+#         status= 'Voto opcional' 
+#     elif(idade >= 18 and idade < 65):
+#         status= 'Voto Obrigatorio'
+#     else:
+#         status= 'Voto Negado'
+    
+#     return (f'Com {idade} anos: {status}')
+
+# ano = int(input('Digite seu ano de nascimento: ')) 
+# print(voto(ano))
+
+
+# --- DESAFIO 7 ---
+def fatorial(num, show=False):
+    n = 1
+    for v in range(num,0, -1):
+        if show:
+            print(v, end='')
+            if(v > 1):
+                print(' x ', end='')
+            else:
+                print(' = ', end='')
+        n *= v
+    return n
+
+print(fatorial(5, show=True))
