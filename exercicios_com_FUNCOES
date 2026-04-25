@@ -141,3 +141,73 @@ def fatorial(num, show=False):
     return n
 
 print(fatorial(5, show=True))
+
+
+# --- DESAFIO 8 ---
+# def ficha(nome='', gols=0):
+#     if(nome.strip() == ''):
+#         return "deconhecido", gols
+#     return nome, gols
+    
+
+# nome = str(input('Digite seu nome: '))
+# gols = input('Quantidade de gols: ')
+
+# if(gols.isnumeric()):
+#     gols = int(gols)
+# else:
+#     gols = 0
+
+# resultado = ficha(nome, gols)
+# print(f'O jogador {resultado[0]} fez {resultado[1]} gols.')
+
+
+
+# --- DESAFIO 9 ---
+# def leiaInt(msg):
+#     while True:
+#      dado = input(msg)
+#      if(dado.isnumeric()):
+#         return int(dado)
+#      else:
+#         return 'Erro, nao e um numero inteiro!'
+
+# n = leiaInt('Digite um numero: ')
+# print(n)
+
+
+
+# --- DESAFIO 10 ---
+# def notas(* num, sit='False'):
+#     ficha = {}
+#     ficha['total'] = len(num)
+#     ficha['maior'] = max(num)
+#     ficha['menor'] = min(num)
+#     soma = sum(num) 
+#     ficha['media'] = soma / len(num)
+
+#     if(sit):
+#         if(ficha['media'] >= 7):
+#             ficha['situacao'] = 'Boa'
+#         elif(ficha['media'] >= 5):
+#             ficha['situacao'] = 'Razoavel'
+#         else:
+#             ficha['situacao'] = 'Ruim'
+#     return ficha
+
+
+# resp = notas(100000000,1,1, sit='True')
+# print(resp)
+
+
+
+# --- DESAFIO 11 ---
+# print('\033[0;30;42m~~~~~~~~~~~~~~~~~~~~~~~~~~\033[m')
+# print('\033[0;30;42m   SISTEMA DE AJUDA PY    \033[m')
+# print('\033[0;30;42m~~~~~~~~~~~~~~~~~~~~~~~~~~\033[m')
+# while True:
+    
+#     com = str(input('Digite seu comando: '))
+#     if (com.upper() == 'FIM'):
+#         break
+#     help(com)
