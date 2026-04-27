@@ -1,0 +1,163 @@
+import random
+
+# DESAFIO 1: Gerenciador de Biblioteca
+# Objetivo: Criar um sistema simples para gerenciar livros usando uma lista de dicionários.
+lista = []
+
+def adicionar_livro(ti, au, ano):
+    livros = {}
+    livros['titulo'] = ti
+    livros['autor'] = au
+    livros['ano'] = ano
+    lista.append(livros.copy())
+    return lista
+
+def listar_livros():
+    l = lista
+    if (len(l) == 0):
+        print('Erro, lista vazia')
+    else:
+        for p in l:
+            print(f'Titulo: {p["titulo"]}, Autor: {p["autor"]}, Ano: {p["ano"]}')
+
+adicionar_livro('O Hobbit', 'J.R.R. Tolkien', 1937)
+listar_livros()
+
+
+# DESAFIO 2: Roleta de Prêmios Dinâmica
+# Objetivo: Uma função que sorteia vencedores e prêmios aleatoriamente usando empacotamento.
+def sorteio_premios(*nomes):
+    premios = ["Notebook", "Mouse", "Teclado", "Monitor"]
+    ganhador = random.choice(nomes)
+    premio = random.choice(premios)
+    return {'ganhador': ganhador, 'premio': premio}
+
+resultado = sorteio_premios("Lucas", "Maria", "Jose", "Paula")
+print(f'O ganhador foi {resultado["ganhador"]} e seu premio foi {resultado["premio"]}')
+
+
+# DESAFIO 3: Analisador de Textos Profundo
+# Objetivo: Receber uma string e retornar várias estatísticas sobre ela empacotadas em um dicionário.
+def analisar_texto(texto):
+    qtde_palavras = len(texto.split())
+    qtde_caracteres = len(texto.replace(' ', ''))
+    vogais = 0
+    for v in texto:
+        if (v.lower() in ('a', 'e', 'i', 'o', 'u')):
+            vogais += 1
+    
+    texto_limpo = texto.replace(' ', '').lower()
+    palindromo = texto_limpo == texto_limpo[::-1]
+    
+    return {
+        'quantidade_p': qtde_palavras, 
+        'qtde_caracteres': qtde_caracteres, 
+        'vogais': vogais, 
+        'palindromo': palindromo
+    }
+
+txt = analisar_texto('Aca')
+print(f'Caracteres: {txt["qtde_caracteres"]}, Vogais: {txt["vogais"]}, Palavras: {txt["quantidade_p"]}, Palindromo: {txt["palindromo"]}')
+
+
+# DESAFIO 4: Sistema de Estoque com Subdicionários
+# Objetivo: Gerenciar um dicionário onde as chaves são os produtos e os valores são outros dicionários.
+estoque_geral = {}
+
+def atualizar_estoque(estoque, nome, quantidade, preco):
+    if (nome in estoque):
+        estoque[nome]['quantidade'] += quantidade
+        estoque[nome]['preco'] = preco  # Atualiza para o preço mais recente
+    else:
+        estoque[nome] = {'quantidade': quantidade, 'preco': preco}
+    return estoque
+
+atualizar_estoque(estoque_geral, 'maca', 5, 2.50)
+atualizar_estoque(estoque_geral, 'maca', 10, 2.30)
+atualizar_estoque(estoque_geral, 'banana', 20, 1.50)
+print(estoque_geral)
+
+
+# DESAFIO 5: Conversor de Câmbio em Lote
+# Objetivo: Utilizar kwargs para converter uma quantia para várias moedas ao mesmo tempo.
+def converter_moedas(valor_reais, **cotacoes):
+    conversoes = {}
+    for c, valor in cotacoes.items():
+        resultado = valor_reais / valor
+        conversoes[c] = resultado
+    return conversoes
+
+m = converter_moedas(100, dolar=5.0, euro=6.0)
+for moeda, valor in m.items():
+    print(f'Moeda: {moeda.upper():<7} Valor Convertido: {valor:.2f}')
+
+
+# DESAFIO 6: Campeonato de eSports
+# Objetivo: Gerenciar pontuações de múltiplos jogadores e ordenar o ranking final.
+def gerar_ranking(lista_jogadores):
+    for j in lista_jogadores:
+        j['media'] = sum(j['pontos']) / len(j['pontos'])
+    lista_jogadores.sort(key=lambda j: j['media'], reverse=True)
+    return lista_jogadores
+
+campeonato = []
+while True:
+    jogador = {}
+    pontos_rodadas = []
+    jogador['nome'] = str(input('Informe seu nome: '))
+    for i in range(1, 4):
+        ponto = int(input(f'Pontuacao da RODADA {i}: '))
+        pontos_rodadas.append(ponto)
+    jogador['pontos'] = pontos_rodadas[:]
+    campeonato.append(jogador.copy())
+
+    opcao = input('CONTINUAR? [S/N] ').strip().upper()
+    if opcao == 'N':
+        break
+
+ranking_final = gerar_ranking(campeonato)
+print('\n' + '='*40)
+print(f'{"RANKING FINAL DO CAMPEONATO":^40}')
+print('='*40)
+for pos, j in enumerate(ranking_final):
+    print(f'{pos+1}º LUGAR: {j["nome"]:<15} | Média: {j["media"]:.2f}')
+print('='*40)
+
+
+# DESAFIO 7: Validador de Senhas em Lote
+# Objetivo: Uma função que filtra e classifica senhas de uma lista.
+def validar_senhas(lista_de_strings):
+    resultados = {}
+    for senha in lista_de_strings:
+        tem_oito_caracteres = len(senha) >= 8
+        tem_numero = any(letra.isdigit() for letra in senha)
+        
+        status = "Forte" if tem_oito_caracteres and tem_numero else "Fraca"
+        resultados[senha] = status
+    return resultados
+
+minhas_senhas = ['abc12345', 'senhasemnumero', '123', 'python2026']
+resultado_final = validar_senhas(minhas_senhas)
+print(f"{' SENHA ':<20} | {' STATUS '}")
+print("-" * 35)
+for s, st in resultado_final.items():
+    print(f"{s:<20} | {st}")
+
+
+# DESAFIO 8: Filtro Corporativo (RH)
+# Objetivo: Filtrar dados de uma lista de dicionários com base em um critério numérico.
+def filtrar_por_salario(funcionarios, valor_minimo):
+    pessoas_filtradas = []
+    for p in funcionarios:
+        if (p['salario'] > valor_minimo):
+            pessoas_filtradas.append(p)
+    return pessoas_filtradas
+
+funcionarios = [
+    {'nome': 'Gustavo', 'salario': 1000},
+    {'nome': 'Maria', 'salario': 2500},
+    {'nome': 'Carlos', 'salario': 3000}
+]
+
+p = filtrar_por_salario(funcionarios, 1000)
+print(p)
