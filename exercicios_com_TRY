@@ -1,0 +1,75 @@
+# desafio 1
+def leiaInt(msg):
+    while True:
+        try:
+         n = int(input(msg)) 
+        except (ValueError, TypeError):
+           print('Dados invalidos.')
+        except KeyboardInterrupt:
+           print('O user preferiu nao digitar nada!')
+           return  None
+        else:
+            return n
+
+
+def leiaFloat(msg):
+    while True:
+        try:
+         dado = float(input(msg).replace(',', '.'))
+        except (ValueError, TypeError):
+           print('Dados invalidos.')
+        except KeyboardInterrupt:
+           print('O user preferiu nao digitar nada!')
+           return  None
+        else:
+           return dado
+
+n = leiaInt('Digite seu número inteiro: ')
+n2 = leiaFloat('Digite seu número decimal: ')
+print(f'Você acabou de digitar o número inteiro: {n}')
+print(f'Você acabou de digitar o número decimal: {n2}')
+
+
+# desafio 2
+try:
+    site = urllib.request.urlopen('https://open.spotify.com')
+except urllib.error.URLError:
+    print('O site nao esta disponivel no momento!')
+else:
+    print('Deu tudo certo!')
+
+
+# desafio 3
+pessoas = {}
+lista = []
+opcao = 0
+while True:
+    try:
+     print('Escolha sua opcao')
+     print('[1] VER PESSOAS CADSATRADAS')
+     print('[2] ADICIONAR NOVA PESSOA')
+     print('[3] ENCERRAR PROGRAMA')
+     opcao = int(input('Opcao: '))
+
+     if(opcao == 1):
+        print('-' * 30)
+        print('=' * 3, 'PESSOAS CADASTRADAS', '=' * 3)
+        for p in lista:
+           print(f'{p["nome"]:<20} {p["idade"]:>3} anos')
+        print('-' * 30)
+     elif(opcao == 2):
+        nome = str(input('Nome: '))
+        idade = int(input('Idade: '))
+        pessoas['nome'] = nome
+        pessoas['idade'] = idade
+        lista.append(pessoas.copy())
+     elif(opcao == 3):
+        print('Programa Encerrado!')
+        break
+    except (ValueError, TypeError) as erro:
+       print(erro)
+    except KeyboardInterrupt:
+       print('O usuario nao digitou nada!')
+    
+
+
