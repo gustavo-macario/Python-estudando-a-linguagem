@@ -161,3 +161,262 @@ funcionarios = [
 
 p = filtrar_por_salario(funcionarios, 1000)
 print(p)
+
+
+# ==============================================================================
+# DESAFIO 9: Lógica de Caixa Eletrônico
+# Objetivo: Distribuir o valor de um saque na menor quantidade de notas possíveis.
+# Regras: Crie uma função sacar(valor) que recebe um número inteiro. A função deve 
+# calcular e retornar um dicionário indicando quantas notas de 100, 50, 20, 10, 5 e 1 
+# serão entregues. Dicionários vazios não devem aparecer no retorno final.
+# ==============================================================================
+def sacar(valor):
+    notas = {'100': 0, '50': 0, '20': 0, '10': 0, '5': 0, '1': 0}
+    
+    while valor > 0:
+        if valor >= 100:
+            valor -= 100
+            notas['100'] += 1
+        elif valor >= 50:
+            valor -= 50
+            notas['50'] += 1
+        elif valor >= 20:
+            valor -= 20
+            notas['20'] += 1
+        elif valor >= 10:
+            valor -= 10
+            notas['10'] += 1
+        elif valor >= 5:
+            valor -= 5
+            notas['5'] += 1
+        else:
+            valor -= 1
+            notas['1'] += 1
+
+    resultado_limpo = {}
+    for nota, quantidade in notas.items():
+        if quantidade > 0:
+            resultado_limpo[nota] = quantidade
+            
+    return resultado_limpo
+
+print(f"Saque de R$151: {sacar(151)}\n")
+
+
+# ==============================================================================
+# DESAFIO 10: Motor de Quiz Interativo
+# Objetivo: Criar um mini-jogo de perguntas e respostas escalável.
+# Regras: Crie uma lista principal onde cada elemento é um dicionário representando 
+# uma pergunta. Crie uma função iniciar_quiz(perguntas) que itere sobre essa lista, 
+# leia a resposta do usuário e calcule os pontos.
+# ==============================================================================
+lista = [{}]
+lista[0]['pergunta'] = 'Qual a capital do brasil?'
+lista[0]['opcoes'] = ['A- BRASILIA', 'B- RIO DE JANEIRO', 'C- SAO PAULO', 'D- CURITIBA']
+lista[0]['resposta'] = 'A'
+
+def iniciar_quiz(perguntas):
+    acertos = 0
+    for p in perguntas:
+        print(p['pergunta'])
+        print(p['opcoes'])
+
+        user = str(input('QUAL SUA RESPOSTA? ')).upper()
+        
+        if user == p['resposta']: 
+            acertos += 1
+            print("Boa! Acertou.")
+        else:
+            print("Puxa, errou!")
+       
+        porc = acertos
+
+    return porc
+
+fun = lista
+print(f'Sua pontuacao foi de {iniciar_quiz(fun)} pontos!\n')
+
+
+# ==============================================================================
+# DESAFIO 11: Analisador do Mega-Sena (Foco em Escopo e Contadores)
+# Objetivo: Contar dados sem deixar as variáveis "resetarem".
+# ==============================================================================
+nums = [1,2,3,4,2,423,1]
+
+def contar_pares_impares(numeros):
+    pares = 0
+    impares = 0
+    for n in numeros:
+        if(n % 2 == 0):
+            pares += 1
+        else:
+            impares += 1
+    return {'pares': pares, 'impares': impares}
+
+res = contar_pares_impares(nums)
+print(f'Pares: {res["pares"]}, Impares: {res["impares"]}\n')
+
+
+# ==============================================================================
+# DESAFIO 12: O Problema do "Two Sum" Simplificado (Foco em Loops Únicos)
+# Objetivo: Encontrar um valor em uma lista sem criar loops duplicados.
+# ==============================================================================
+lista_caixas = [
+    {'numeros': [1, 2, 3]}, 
+    {'numeros': [10, 20, 30]}, 
+    {'numeros': [100, 200, 300]}
+]
+
+def achar_metade(lista_num, alvo):
+    met = alvo / 2
+    for caixa in lista_num:
+        for chave in caixa:
+           if(met in caixa[chave]):
+              return caixa
+        
+res = achar_metade(lista_caixas, 20)
+print(f'O numeros estava no dicionarios {res}\n')
+
+
+# ==============================================================================
+# DESAFIO 13: Migração de Celulares (Foco em Listas de Dicionários)
+# Objetivo: Alterar dados específicos dentro de uma lista de dicionários.
+# ==============================================================================
+celulares = [
+    {'modelo': 'iPhone 7', 'marca': 'Apple'},
+    {'modelo': 'Galaxy A56', 'marca': 'Samsung'}
+]
+
+def atualizar_status(aparelhos):
+    for c in aparelhos:
+        if(c['marca'] == 'Samsung'):
+            c['status'] = 'Migrado'
+        elif(c['marca'] == 'Apple'):
+            c['status'] = 'Pendente'
+    return aparelhos
+
+res = atualizar_status(celulares)
+print(f"{res}\n")
+
+
+# ==============================================================================
+# DESAFIO 14: Calculadora de Probabilidade (kwargs)
+# Objetivo: Dominar o uso de parâmetros dinâmicos e fazer contas com eles.
+# ==============================================================================
+def calcular_probabilidade(total, **eventos):
+    pro = 0
+    dic = {}
+    for c, evento in eventos.items():
+        pro = (evento / total) * 100
+        dic[c] = pro
+    return dic
+
+res = calcular_probabilidade(10, cara=6, coroa=4)
+print(f"{res}\n")
+
+
+# ==============================================================================
+# DESAFIO 15: O Caçador de Bugs (Foco em Sintaxe)
+# Objetivo: Consertar um código que mistura listas e dicionários de forma errada.
+# ==============================================================================
+alunos = [{}]
+alunos[0]['nome'] = 'Carlos'
+alunos[0]['nota'] = 8.5
+
+for a in alunos:
+    print(f'O aluno {a["nome"]} tirou {a["nota"]}\n')
+
+
+# ==============================================================================
+# DESAFIO 16: O Conversor de Moedas Dinâmico
+# Objetivo: Praticar cálculos dentro de dicionários aninhados.
+# ==============================================================================
+def converter_precos(produtos, taxa):
+    convertido = 0
+    for p in produtos:
+        convertido = p['precos']['real'] / taxa
+        p['precos']['dolar'] = convertido
+    return produtos
+
+itens = [
+    {'nome': 'Mouse', 'precos': {'real': 150}},
+    {'nome': 'Teclado', 'precos': {'real': 300}}
+]
+
+res = converter_precos(itens, 5)
+print(f"{res}\n")
+
+
+# ==============================================================================
+# DESAFIO 17: Validador de Tipos (Try/Except)
+# Objetivo: Evitar que o programa quebre se o usuário digitar bobagem.
+# ==============================================================================
+def somar_lista_suja(lista):
+        soma = 0
+        for i in lista:
+            try:
+                i = float(i)
+                soma += i
+            except:
+                print(f"Nao foi possivel somar '{i}'! ")
+
+        return soma
+
+suja = [10, 'abc', 20, '50', 5]
+resp = somar_lista_suja(suja)
+print(f"{resp}\n")
+
+
+# ==============================================================================
+# DESAFIO 18: O Gerador de E-mails Institucionais
+# Objetivo: Manipulação de Strings e criação de novos dados.
+# ==============================================================================
+def emails(lista):
+    for n in lista:
+        n['email'] = f"{n['nome']}.{n['sobrenome']}@empresa.com".lower()
+    return lista
+
+usuarios = [{'nome': 'Amaldir', 'sobrenome': 'Jose'}]
+res = emails(usuarios)
+print(f"{res}\n")
+
+
+# ==============================================================================
+# DESAFIO 19: O Ranking de Vendas (Sort Avançado)
+# Objetivo: Ordenar listas de dicionários por critérios específicos.
+# ==============================================================================
+def ranking(lista):
+    lista.sort(key=lambda v: v['vendas'], reverse=True)
+    return lista[:3]
+    
+vendedores = [
+    {'nome': 'Ana', 'vendas': 500},
+    {'nome': 'Beto', 'vendas': 1500},
+    {'nome': 'Caio', 'vendas': 800},
+    {'nome': 'Duda', 'vendas': 2000}
+]
+
+res = ranking(vendedores)
+print(f"{res}\n")
+
+
+# ==============================================================================
+# DESAFIO 20: O Sistema de Login (Dicionário de Dicionários)
+# Objetivo: Mudar a estrutura da lista para um dicionário de busca rápida.
+# ==============================================================================
+def fazer_login(base_usuarios, user, senha):
+    if(user in base_usuarios):
+        if (senha == base_usuarios[user]['senha']):
+           return "Acesso permitido"
+        else:
+            return "Senha incorreta"
+    else:
+        return "Usuário inexistente"
+        
+base = {
+    'admin': {'senha': '123', 'nivel': 'total'},
+    'user1': {'senha': 'abc', 'nivel': 'comum'}
+}
+
+res = fazer_login(base, 'admin', '123')
+print(res)
