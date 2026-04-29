@@ -420,3 +420,194 @@ base = {
 
 res = fazer_login(base, 'admin', '123')
 print(res)
+
+
+# ==============================================================================
+# DESAFIO 21: A Armadilha do Loop Infinito (Validador de Entrada)
+# Objetivo: Garantir que o input ocorra no local certo para evitar travamentos.
+# ==============================================================================
+def pedir_numero():
+    while True:
+        try:
+            num = int(input('Digite um numero: '))
+            if (num >= 0):
+                break
+            else:
+                print("Por favor, digite um número positivo.")
+        except:
+            print('Valor digitado nao é um numero! Tente novamente')
+    return num
+
+# valor = pedir_numero()
+# print(f'Sucesso! O valor {valor} foi guardado na variável.\n')
+
+
+# ==============================================================================
+# DESAFIO 22: O Anagrama Perfeito 
+# Objetivo: Usar dicionários para otimizar comparações (sem usar listas).
+# ==============================================================================
+def eh_anagrama(p1, p2):
+    dic1 = {}
+    dic2 = {}
+    
+    for letra in p1:
+        if(letra in dic1):
+            dic1[letra] += 1
+        else:      
+            dic1[letra] = 1
+    for letra in p2:
+        if(letra in dic2):
+            dic2[letra] += 1
+        else:      
+            dic2[letra] = 1
+    return dic1 == dic2
+
+print(f"Anagrama 'amor' e 'roma': {eh_anagrama('amor', 'roma')}\n")
+
+
+# ==============================================================================
+# DESAFIO 23: O Teorema de Bayes
+# Objetivo: Aplicar fórmulas matemáticas precisas em funções.
+# Formula: P(A|B) = (P(B|A) * P(A)) / P(B)
+# ==============================================================================
+def bayes(p_a, p_b_dado_a, p_b):
+    pro = (p_b_dado_a * p_a) / p_b
+    return pro * 100.0
+
+res_bayes = bayes(0.01, 0.9, 0.05)
+print(f'O resultado de Bayes é: {res_bayes:.2f}%\n')
+
+
+# ==============================================================================
+# DESAFIO 24: Formatador de Tabelas para GitHub
+# Objetivo: Manipulação avançada de strings para documentação e portfólio.
+# ==============================================================================
+def gerar_markdown(desafios):
+    tabela = "| ID | Nome | Status |\n"
+    tabela += "|-----|-----|-----|\n"
+    for des in desafios:
+        linha = f"| {des['id']} | {des['nome']} | {des['status']} |\n"
+        tabela += linha
+    return tabela
+
+projetos = [
+    {'id': 20, 'nome': 'Sistema Login', 'status': 'Concluído'},
+    {'id': 21, 'nome': 'Loop Seguro', 'status': 'Pendente'}
+]
+
+print("Tabela Markdown gerada:")
+print(gerar_markdown(projetos))
+
+
+# ==============================================================================
+# DESAFIO 25: O Otimizador de Two Sum (Busca Rápida O(n))
+# Objetivo: Resolver o problema em um único loop usando dicionários.
+# ==============================================================================
+def buscarapida(nums, alvo):
+    vistos = {}
+
+    for n in nums:
+        complemento = alvo - n
+        if (complemento in vistos):
+            return n, complemento
+        else:
+            vistos[n] = True
+
+numeros = [1, 7, 2, 15]
+res_sum = buscarapida(numeros, 9)
+print(f'Par encontrado para o alvo 9: {res_sum}\n')
+
+
+# ==============================================================================
+# DESAFIO 26: Calculadora de Árvore de Probabilidade
+# Objetivo: Navegar em dicionários aninhados usando .get().
+# ==============================================================================
+def chance_total(arvore, urna, cor):
+    u = arvore.get(urna)
+    if(u):
+        c = u.get(cor)
+        return c         
+    else:
+        return 'Caminho inválido'
+
+arvore_exemplo = {
+    'urna1': {'azul': 0.3, 'vermelha': 0.7},
+    'urna2': {'azul': 0.6, 'vermelha': 0.4}
+}
+
+res_prob = chance_total(arvore_exemplo, 'urna1', 'azul')
+print(f'Probabilidade na urna1 (azul): {res_prob}\n')
+
+
+# ==============================================================================
+# DESAFIO 27: Construtor de Prompts de Imagem (kwargs)
+# Objetivo: Agrupar configurações dinâmicas de forma modular.
+# ==============================================================================
+def construir_prompt(personagem, acao, **detalhes):
+    prompt = f"{personagem} {acao}"
+
+    for c, v in detalhes.items():
+        prompt += f", {c}: {v}"
+    return prompt
+
+chamada = construir_prompt('Amelia', 'caminhando', camera='DSLR', estilo='candid', luz='natural')
+print(f"Prompt Gerado: {chamada}\n")
+
+
+# ==============================================================================
+# DESAFIO 28: Filtro de Log de Migração de Aparelhos
+# Objetivo: Atualizar valores numéricos dentro de um dicionário.
+# ==============================================================================
+def ajustar_tamanho(backups, taxa_crescimento):
+    for c, v in backups.items():
+        backups[c] = v * taxa_crescimento
+    return backups
+
+dispositivos = {'iPhone 7': 45.0, 'Galaxy A56': 12.5}
+res_migra = ajustar_tamanho(dispositivos, 1.10)
+
+print("Tamanhos de Backup Atualizados:")
+for a, t in res_migra.items():
+    print(f'{a}: {t:.2f} GB')
+print()
+
+
+# ==============================================================================
+# DESAFIO 29: O Módulo "Dado" (Limpeza Avançada de Strings)
+# Objetivo: Transformar strings financeiras sujas em floats.
+# ==============================================================================
+def limpar_moeda(texto):
+    try:
+        limpo = texto.strip().replace('R$', '')
+        limpo = limpo.replace(' ', '')
+        limpo = limpo.replace('.', '')
+        limpo = limpo.replace(',', '.')
+
+        return float(limpo)
+    
+    except:
+        return 'Nao foi possivel alterar o tipo de dado!'
+
+res_limpeza = limpar_moeda("   R$ 2.450,99  ")
+print(f"Valor limpo para cálculo: {res_limpeza}\n")
+
+
+# ==============================================================================
+# DESAFIO 30: Agrupamento Estatístico (Frequência Bruta)
+# Objetivo: Contar repetições e ordenar por frequência usando lambda.
+# ==============================================================================
+def gerar_frequencia(notas):
+    dic = {}
+    for n in notas:
+        if(n in dic):
+            dic[n] += 1
+        else:
+            dic[n] = 1
+    lista_ordenada = sorted(dic.items(), key=lambda item: item[1], reverse=True)
+    return lista_ordenada
+    
+notas_turma = [7, 8, 7, 10, 5, 8, 7, 8, 8, 9]
+res_freq = gerar_frequencia(notas_turma)
+
+print("Frequencia de notas (Nota, Quantidade):")
+print(res_freq)
