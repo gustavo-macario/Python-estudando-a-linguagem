@@ -611,3 +611,172 @@ res_freq = gerar_frequencia(notas_turma)
 
 print("Frequencia de notas (Nota, Quantidade):")
 print(res_freq)
+
+
+# ==============================================================================
+# DESAFIO 31: A Urna Eletrônica (Foco: Chaves Dinâmicas)
+# Objetivo: Receber uma lista de votos: votos = ['Ana', 'João', 'Ana', 'Carlos', 'Ana', 'João'].
+# Regra: Crie a função contar_votos(lista). Retorne um dicionário onde a chave é o nome do candidato e o valor é a quantidade de votos. 
+# ==============================================================================
+
+def contar_votos(lista):
+    dic = {}
+    for p in lista:
+        if(p in dic):
+            dic[p] += 1 
+        else:
+            dic[p] = 1
+    return dic
+
+votos = ['Ana', 'João', 'Ana', 'Carlos', 'Ana', 'João']
+res = contar_votos(votos)
+print(res)
+
+
+# ==============================================================================
+# DESAFIO 32: A Liquidação (Foco: Atualização de Dicionários)
+# Objetivo: Você tem estoque = {'Camiseta': 50.0, 'Tenis': 120.0}.
+# Regra: Crie aplicar_desconto(produtos, desconto). Atualize o dicionário original reduzindo o preço pela porcentagem do desconto.
+# ==============================================================================
+
+def aplicar_desconto(produtos, desconto):
+    for p in produtos:
+        produtos[p] = produtos[p] - (desconto * produtos[p]) 
+    return produtos
+
+estoque = {'Camiseta': 50.0, 'Tenis': 120.0}
+res = aplicar_desconto(estoque, 0.10)
+print(res)
+
+
+# ==============================================================================
+# DESAFIO 33: O Higienizador de CPF (Foco: Limpeza em Cadeia)
+# Objetivo: Você recebe um CPF sujo: "  123.456.789-00  ".
+# Regra: Crie limpar_cpf(texto). Remova os espaços nas pontas, os pontos e o traço. O retorno deve ser apenas os números.
+# ==============================================================================
+
+def limpar_cpf(texto):
+    limpo = texto.strip().replace(' ','').replace('.','').replace('-','')
+    return limpo
+
+print(limpar_cpf("  123.456.789-00  "))
+
+
+# ==============================================================================
+# DESAFIO 34: O Porteiro de Servidores (Foco: Navegação Segura)
+# Objetivo: Dicionário aninhado: rede = {'servidor_bd': {'status': 'online', 'porta': 5432}}.
+# Regra: Crie checar_porta(rede, servidor). Use o .get() para entrar no servidor e depois pegar a porta. 
+# ==============================================================================
+
+def checar_porta(rede, servidor):
+    dados_do_servidor = rede.get(servidor)
+    if dados_do_servidor:
+        dados_do_servidor = dados_do_servidor.get('porta')
+    else:
+        return 'Essa porta nao existe!'
+    return dados_do_servidor
+    
+rede = {'servidor_bd': {'status': 'online', 'porta': 5432}}
+print(checar_porta(rede, 'servidor_bd'))
+
+
+# ==============================================================================
+# DESAFIO 35: Construtor de URLs (Foco: kwargs e Concatenação)
+# Objetivo: Criar links dinâmicos da web.
+# Regra: Crie montar_url(site, parametros). A base é f"www.{site}.com?". Percorra os kwargs e vá somando na string.
+# ==============================================================================
+
+def montar_url(site, **parametros):
+    base = f"www.{site}.com?"
+    for c, v in parametros.items():
+        base += (f'{c}={v}&')
+    return base
+
+print(montar_url('loja', busca='celular', page=2))
+
+
+# ==============================================================================
+# DESAFIO 36: O Mundo Invertido (Foco: Manipulação de Dicionários)
+# Objetivo: Trocar chaves e valores de lugar.
+# Regra: Crie inverter_dicionario(dic). Receba algo como {'A': 1, 'B': 2} e crie um novo dicionário que seja {1: 'A', 2: 'B'}.
+# ==============================================================================
+
+def inverter_dicionario(dic):
+    di2 = {}
+    for c, v in dic.items():
+        di2[v] = c
+    return di2
+
+dic = inverter_dicionario({'A': 1, 'B': 2})
+print(dic)
+
+
+# ==============================================================================
+# DESAFIO 37: O Pódio da Fórmula 1 (Foco: Ordenação com Lambda)
+# Objetivo: Você tem os tempos das voltas: tempos = {'Hamilton': 62.5, 'Verstappen': 61.2, 'Leclerc': 61.8}.
+# Regra: Crie ranquear_pilotos(tempos). Transforme em lista com .items() e ordene do menor para o maior tempo usando lambda.
+# ==============================================================================
+
+def ranquear_pilotos(tempos):
+    lista = list(tempos.items())
+    lista.sort(key=lambda x: x[1])
+    return lista
+
+tempos = {'Hamilton': 62.5, 'Verstappen': 61.2, 'Leclerc': 61.8}
+print(ranquear_pilotos(tempos))
+
+
+# ==============================================================================
+# DESAFIO 38: Fusão de Estoques (Foco: Verificação de Chaves)
+# Objetivo: Juntar o estoque da Loja A com a Loja B.
+# Regra: Crie juntar_estoques(loja_a, loja_b). Se o item existir na loja_a, some; se não, crie.
+# ==============================================================================
+
+def juntar_estoques(loja_a, loja_b):
+    for item, qtde in loja_b.items():
+        if(item in loja_a):
+            loja_a[item] += qtde
+        else:
+            loja_a[item] = qtde
+    return loja_a
+
+estoque_a = {'maca': 10, 'banana': 5}
+estoque_b = {'banana': 10, 'uva': 8}
+print(juntar_estoques(estoque_a, estoque_b))
+
+
+# ==============================================================================
+# DESAFIO 39: Agrupador de Letras (Foco: Chaves Dinâmicas com Listas)
+# Objetivo: Uma evolução do Anagrama.
+# Regra: Crie mapear_letras(palavra). O dicionário deve guardar uma lista com a(s) posição(ões) da letra. 
+# ==============================================================================
+
+def mapear_letras(palavra):
+    dic = {}
+    for i, l in enumerate(palavra):
+        if(l in dic):
+            dic[l].append(i)
+        else:
+            dic[l] = [i]
+    return dic
+
+print(mapear_letras("ovo"))
+
+
+# ==============================================================================
+# DESAFIO 40: O Caixa à Prova de Falhas 
+# Objetivo: Cobrar produtos do usuário via input().
+# Regra: Use um loop while True com try/except KeyError para não quebrar o programa.
+# ==============================================================================
+
+tabela_precos = {'maça': 5.5, 'banana': 3.0, 'leite': 4.2}
+
+while True:
+    try:
+        p = input('Digite um produto: ').lower()
+        preco = tabela_precos[p]       
+        print(f'O produto {p} custa R$ {preco:.2f}')
+        break  
+        
+    except KeyError:
+        print('Produto não existe no estoque! Tente novamente.')
